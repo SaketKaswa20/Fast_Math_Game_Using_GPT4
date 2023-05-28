@@ -13,9 +13,10 @@ let timeRemaining = 60;
 let score = 0;
 let correctAnswer;
 let playerName;
+let timer;
 
 function generateQuestion() {
-  const operations = ['+', '-', '*', '/', '%'];
+  const operations = ['+', '-', '*', '/'];
   const num1 = Math.floor(Math.random() * 10) + 1;
   const num2 = Math.floor(Math.random() * 10) + 1;
   const operation = operations[Math.floor(Math.random() * operations.length)];
@@ -58,16 +59,14 @@ function startGame() {
     generateQuestion();
   });
 
-  const timer = setInterval(() => {
-    if (answerElement.value.length > 0) {
-      timeRemaining--;
-      timerElement.textContent = timeRemaining;
+  timer = setInterval(() => {
+    timeRemaining--;
+    timerElement.textContent = timeRemaining;
 
-      if (timeRemaining <= 0) {
-        clearInterval(timer);
-        alert(`Game over! Your score is: ${score}`);
-        location.reload();
-      }
+    if (timeRemaining <= 0) {
+      clearInterval(timer);
+      alert(`Game over! Your score is: ${score}`);
+      location.reload();
     }
   }, 1000);
 }
